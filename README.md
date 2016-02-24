@@ -1,6 +1,9 @@
 # gsv8pypi
 
 ## Content
+
+### Required files for use the GSV-8 Lib
+
 Filename | 	Description
 --- | ---
 gsv8.py | GSV-8 Lib; include this file **only** in your own python script
@@ -8,7 +11,9 @@ gsv8.html | GSV-8 Lib documentation (german only)
 example_config.py | explains how to config the GSV-8 via the python GSV-8 Lib
 example_record.py | explains how to record measure-data and how to get the DIO-Pin level
 
-Filename | 	associated files
+### All files
+
+Filename | 	associated files (moduls)
 --- | ---
 gsv8.py | CSVwriter.py, GSV_BasicMeasurement.py, GSV_Exceptions.py, GSV6_AnfrageCodes.py, GSV6_BasicFrameType.py, GSV6_ErrorCodes.py, GSV6_FrameRouter.py, GSV6_MessFrameHandler.py, GSV6_Protocol.py, GSV6_SeriallLib.py, GSV6_UnitCodes.py, ThreadSafeVar.py
 gsv8.html | _static folder

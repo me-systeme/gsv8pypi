@@ -2,7 +2,7 @@
 
 ## Content
 
-### Required files for use the GSV-8 Lib
+### these files are useful if you want to use GSV-8 Lib 
 
 Filename | 	Description
 --- | ---

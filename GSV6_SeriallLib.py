@@ -564,12 +564,22 @@ class GSV6_seriall_lib:
         return self.encode_anfrage_frame(anfrage_code_to_shortcut.get('SetDIOdirection'), data)
 
     def buildGetDIOlevel(self, IOPin):
-        return self.encode_anfrage_frame(anfrage_code_to_shortcut.get('GetDIOlevel'),[IOPin])
+        data = bytearray([self.convertUInt8ToBytes(IOPin)])
+        return self.encode_anfrage_frame(anfrage_code_to_shortcut.get('GetDIOlevel'),data)
 
     def buildSetDIOlevel(self, IOPin, newlevel):
         data = bytearray([self.convertUInt8ToBytes(IOPin)])
         data.extend(self.convertUInt16ToBytes(newlevel))
         return self.encode_anfrage_frame(anfrage_code_to_shortcut.get('SetDIOlevel'), data)
+
+    def buildGetDIOinitialLevel(self, IOPin):
+        data = bytearray([self.convertUInt8ToBytes(IOPin)])
+        return self.encode_anfrage_frame(anfrage_code_to_shortcut.get('GetDIOinitialLevel'),data)
+
+    def buildSetDIOinitialLevel(self, IOPin, newlevel):
+        data = bytearray([self.convertUInt8ToBytes(IOPin)])
+        data.extend(self.convertUInt16ToBytes(newlevel))
+        return self.encode_anfrage_frame(anfrage_code_to_shortcut.get('SetDIOinitialLevel'), data)
 
     def buildGetMode(self):
         return self.encode_anfrage_frame(anfrage_code_to_shortcut.get('GetMode'))

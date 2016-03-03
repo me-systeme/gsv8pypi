@@ -103,10 +103,16 @@ class MessFrameHandler():
             # add data here
             self.messCSVDictList_lock.acquire()
 
+            tmpM = {'timestamp': timestamp}
+            for (i, value) in enumerate(values):
+                tmpM['channel'+str(i)] = value
+            self.messCSVDictList.append(tmpM)
+            '''
             self.messCSVDictList.append(
                 {'timestamp': timestamp, 'channel0': values[0], 'channel1': values[1], 'channel2': values[2],
                  'channel3': values[3], 'channel4': values[4], 'channel5': values[5], 'channel6': values[6],
                  'channel7': values[7]})
+            '''
             self.messCSVDictList_lock.release()
             if (self.messCounter >= self.maxCacheMessCount):
                 self.messCounter = 0

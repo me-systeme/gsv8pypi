@@ -72,49 +72,57 @@ class BasicMeasurement:
         Die Methode getChannel0 returned des messwert von Kanal 0
     '''
     def getChannel1(self):
-        return self.data[1]['channel0']
+        if(len(self.data[1])>=1):
+            return self.data[1]['channel0']
 
     '''
         Die Methode getChannel1 returned des messwert von Kanal 1
     '''
     def getChannel2(self):
-        return self.data[1]['channel1']
+        if(len(self.data[1])>=2):
+            return self.data[1]['channel1']
 
     '''
         Die Methode getChannel2 returned des messwert von Kanal 2
     '''
     def getChannel3(self):
-        return self.data[1]['channel2']
+        if(len(self.data[1])>=3):
+            return self.data[1]['channel2']
 
     '''
         Die Methode getChannel3 returned des messwert von Kanal 3
     '''
     def getChannel4(self):
-        return self.data[1]['channel3']
+        if(len(self.data[1])>=4):
+            return self.data[1]['channel3']
 
     '''
         Die Methode getChannel4 returned des messwert von Kanal 4
     '''
     def getChannel5(self):
-        return self.data[1]['channel4']
+        if(len(self.data[1])>=5):
+            return self.data[1]['channel4']
 
     '''
         Die Methode getChannel5 returned des messwert von Kanal 5
     '''
     def getChannel6(self):
-        return self.data[1]['channel5']
+        if(len(self.data[1])>=6):
+            return self.data[1]['channel5']
 
     '''
         Die Methode getChannel6 returned des messwert von Kanal 6
     '''
     def getChannel7(self):
-        return self.data[1]['channel6']
+        if(len(self.data[1])>=7):
+            return self.data[1]['channel6']
 
     '''
         Die Methode getChannel7 returned des messwert von Kanal 7
     '''
     def getChannel8(self):
-        return self.data[1]['channel7']
+        if(len(self.data[1])>=8):
+            return self.data[1]['channel7']
 
     '''
         Die Methode isInputOverload returned den InputOverload Status

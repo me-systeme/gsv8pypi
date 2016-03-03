@@ -80,6 +80,8 @@ anfrage_code_to_shortcut = {
     'SetDIOlevel': 0x5E,
     'ReadDIOthreshold': 0x5F,
     'WriteDIOthreshold': 0x60,
+    'GetDIOinitialLevel': 0x61,
+    'SetDIOinitialLevel': 0x62,
     'Get1WireTempValue': 0x79,
     'ReadDataRate': 0x8A,
     'GetTXMode': 0x80,

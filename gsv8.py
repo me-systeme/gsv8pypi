@@ -303,6 +303,7 @@ class gsv8:
         else:
             # alte Messwerte löschen
             # self._messwertRotatingQueue.clear()
+            self._lastMesswert.setVar(None)
 
             # erstelle zu sendene Bytefolge für GetValue (OneShot)
             output = self._gsvLib.buildGetValue()
@@ -569,6 +570,63 @@ class gsv8:
         :rtype: bool
         '''
         return not self.isPinHigh(IOPin)
+
+    def getDIOinitialLevel(self, IOPin):
+        '''
+        Ruft das jeweilige initial DIOlevel vom GSV ab
+
+        :param IOPin: IOPin 1..16 (1.1 - 4.4)
+        :type IOPin: uint8
+        :return: 0 wenn Low; 1 wenn high
+        :rtype: uint8
+        '''
+        # erstelle zu sendene Bytefolge für getDIOlevel
+        output = self._gsvLib.buildGetDIOinitialLevel(IOPin)
+
+        # sende Daten via serialport
+        self._gsvSerialPort.write(output)
+
+        # ersten AntwortFrame aus der Queue holen
+        antwortFrame = self._antwortQueue.get()
+
+        # returnstatment erzeugen
+        if (antwortFrame.getAntwortErrorCode() == 0x00):
+            result = self._gsvLib.convertToUint16_t(antwortFrame.getPayload())[0]
+
+        else:
+            raise GSV_CommunicationException(antwortFrame.getAntwortErrorCode(), antwortFrame.getAntwortErrorText())
+
+        return result
+
+    def setDIOinitialLevel(self, IOPin, level):
+        '''
+        Setzt das DIO level am gewünschten Pin
+        level 1 = high 0 low
+
+        :param IOPin: IOPin 1..16 (1.1 - 4.4)
+        :param level: high=1; low=0
+        :type IOPin: uint8
+        :type level: uint8
+        :return: AntwortErrorCode und AntwortErrorText
+        :rtype: liste
+        '''
+
+        # erstelle zu sendene Bytefolge für WriteDataRate
+        output = self._gsvLib.buildSetDIOinitialLevel(IOPin, level)
+
+        # sende Daten via serialport
+        self._gsvSerialPort.write(output)
+
+        # ersten AntwortFrame aus der Queue holen
+        antwortFrame = self._antwortQueue.get()
+
+        # returnstatment erzeugen
+        if (antwortFrame.getAntwortErrorCode() == 0x00):
+            result = [antwortFrame.getAntwortErrorCode(), antwortFrame.getAntwortErrorText()]
+        else:
+            raise GSV_CommunicationException(antwortFrame.getAntwortErrorCode(), antwortFrame.getAntwortErrorText())
+
+        return result
 
     def writeDataRate(self, frequenz):
         '''

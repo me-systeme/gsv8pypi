@@ -64,8 +64,8 @@ if __name__ == '__main__':
     dev1 = gsv8(21, 115200)
 
     schwellwert1 = 250.0
-    hysterese_high = 250.0
-    hysterese_low = 240.0
+    hysterese_high = 0.48
+    hysterese_low = 0.45
 
 
     # einen eine Messung anstoßen
@@ -86,23 +86,26 @@ if __name__ == '__main__':
     else:
         print "matrix inactive"
 
+    dev1.StartTransmission()
+
     try:
         while (True):
             # Eine Messung anfordern und Messwert von Kanal1 in einer Variablen speichern
-            messwert = dev1.ReadValue().getChannel1()
+            messwert = dev1.ReadValue().getChannel3()
+            # print messwert
             '''
             # Aktion auf Schwellwert - Enifache Variante
             if(messwert >= schwellwert1):
-                dev1.startCSVrecording(10.0, './messungen')
+                dev1.startCSVrecordingWithoutStartTransmisson('./messungen')
             else:
-                dev1.stopCSVrecording()
+                 dev1.stopCSVrecordingWithoutStopTransmission()
             '''
 
             # Aktion auf Schwellwert - mit Hysterese
             if(messwert >= hysterese_high):
-                dev1.startCSVrecording(10.0, './messungen')
+                dev1.startCSVrecordingWithoutStartTransmisson('./messungen')
             elif(messwert <= hysterese_low):
-                dev1.stopCSVrecording()
+                dev1.stopCSVrecordingWithoutStopTransmission()
     except KeyboardInterrupt:
         dev1.stopCSVrecording()
     finally:

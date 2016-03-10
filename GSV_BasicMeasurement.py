@@ -86,6 +86,7 @@ class BasicMeasurement:
         Die Methode getChannel2 returned des messwert von Kanal 2
     '''
     def getChannel3(self):
+
         if(len(self.data[1])>=3):
             return self.data[1]['channel2']
 

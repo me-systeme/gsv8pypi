@@ -66,9 +66,10 @@ if __name__ == '__main__':
 
     # Messaufzeichnung starten
     dev1.startCSVrecordingWithoutStartTransmisson('./messungen')
+
     try:
         while (True):
-            input = input()
+            pass
     except KeyboardInterrupt:
         # wennn Programm durch Tastatur beendet wird, Messung stoppen
         dev1.stopCSVrecording()

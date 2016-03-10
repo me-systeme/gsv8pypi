@@ -61,9 +61,11 @@ if __name__ == '__main__':
     dev1 = gsv8(21, 115200)
 
     # ausgabetyp setzten
+    '''
     result =  dev1.setTXmodefloat()
     if(dev1.isResultOk(result)):
         print "setTXmodefloat erfolgreich"
+    '''
 
     # Datenrate setzten
     result = dev1.writeDataRate(30.0)
@@ -108,7 +110,8 @@ if __name__ == '__main__':
 
 
     dev1.setInputToTaraInputForAllChannels(3);
-    dev1.setStartTransmissionByInputIsHigh(4);
+    #dev1.setStartTransmissionByInputIsHigh(4);
+    dev1.setDIOtoGenralPurposeInput(4)
 
     # Beispiel zum erfragen der aktuellen Einstellung der DIO Gruppe
     '''
@@ -170,7 +173,7 @@ if __name__ == '__main__':
 
 
     # Verrechnungsmatrix aktivieren
-    if(dev1.setSixAxisMatrixActive(True)):
+    if(dev1.setSixAxisMatrixActive(False)):
         pass
         # aktiverung/deaktivierung erflgreich
 

@@ -96,7 +96,7 @@ class ThreadingReadFromSerial(threading.Thread):
                 bytesToRead = self.gsvSerialPort.in_waiting
             if (bytesToRead > 0):
                 self.serialProtocol.dataReceived(bytearray(self.gsvSerialPort.read(bytesToRead)))
-            time.sleep(0.001)
+            #time.sleep(0.001)
 
     def stop(self):
         self.runnng = False
@@ -128,6 +128,8 @@ class gsv8:
 
     # GSV Lib
     _gsvLib = None
+
+    transmissionIsRunning = True
 
     def __init__(self, port, baudrate):
         logging.getLogger('gsv8').setLevel(logging.INFO)
@@ -218,6 +220,9 @@ class gsv8:
         :rtype: liste
         '''
 
+        if not self.transmissionIsRunning:
+            return
+
         # erstelle zu sendene Bytefolge für StopTransmission
         output = self._gsvLib.buildStopTransmission()
 
@@ -243,6 +248,8 @@ class gsv8:
         :return: AntwortCode und AntwortErrorText
         :rtype: liste
         '''
+        if self.transmissionIsRunning:
+            return
 
         # erstelle zu sendene Bytefolge für StartTransmission
         output = self._gsvLib.buildStartTransmission()
@@ -299,7 +306,7 @@ class gsv8:
 
         if(self.transmissionIsRunning):
             # return self._messwertRotatingQueue[0]
-            result = copy.copy(self._lastMesswert.getVar())
+            result = copy.deepcopy(self._lastMesswert.getVar())
         else:
             # alte Messwerte löschen
             # self._messwertRotatingQueue.clear()
@@ -1204,9 +1211,9 @@ class gsv8:
         :param csvFilepath: Zielpfad fuer die CSV-Datei
         :type csvFilepath: String
         '''
-        self.router.startCSVRecording(csvFilepath)
-
-        self.StartTransmission()
+        if not self.router.isRecording():
+            self.router.startCSVRecording(csvFilepath)
+            self.StartTransmission()
 
     def startCSVrecording(self, frequenz, csvFilepath):
         '''
@@ -1222,11 +1229,10 @@ class gsv8:
         :type frequenz: float
         :type csvFilepath: String
         '''
-        self.writeDataRate(frequenz)
-
-        self.router.startCSVRecording(csvFilepath)
-
-        self.StartTransmission()
+        if not self.router.isRecording():
+            self.writeDataRate(frequenz)
+            self.router.startCSVRecording(csvFilepath)
+            self.StartTransmission()
 
     def stopCSVrecordingWithoutStopTransmission(self):
         '''
@@ -1243,10 +1249,9 @@ class gsv8:
 
         *Achtung* Es wird StopTransmission aufgerufen!
         '''
-
-        self.router.stopCSVRecording()
-
-        self.StopTransmission()
+        if self.router.isRecording():
+            self.router.stopCSVRecording()
+            self.StopTransmission()
 
     def get1wireTempValue(self):
         '''

@@ -114,3 +114,6 @@ class FrameRouter(threading.Thread):
 
     def stopCSVRecording(self):
         self.messFrameEventHandler.stopRecording()
+
+    def isRecording(self):
+        return self.messFrameEventHandler.doRecording

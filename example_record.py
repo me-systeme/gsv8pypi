@@ -80,16 +80,20 @@ if __name__ == '__main__':
     else:
         print "matrix inactive"
 
+    dev1.StartTransmission()
+
     try:
         while (True):
             # Ist IOPin 1 (1.1) High?
             if (dev1.isPinHigh(1)):
                 # startet die Messwertaufnahme mit 10 Hz und legt eine CSV Datei an, die als Name den aktuellen Timestamp besitzt
-                dev1.startCSVrecording(10.0, './messungen')
+                #dev1.startCSVrecording(10.0, './messungen')
+                dev1.startCSVrecordingWithoutStartTransmisson('./messungen')
 
             # Ist IOPin 2 (1.2) High?
             if (dev1.isPinHigh(2)):
-                dev1.stopCSVrecording()
+                #dev1.stopCSVrecording()
+                dev1.stopCSVrecordingWithoutStopTransmission()
 
             # Wert von DMS-Kanal 1 abfragen
             if (dev1.ReadValue().getChannel1() < -220.0):

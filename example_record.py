@@ -54,13 +54,14 @@ __author__ = 'Robert bremsat & Dennis Rump'
 ###############################################################################
 
 from gsv8 import gsv8
+import sys
 
 if __name__ == '__main__':
     # construct device
     # Unix
     # dev1 = gsv8("/dev/ttyACM0",115200)
     # Windows
-    dev1 = gsv8(21, 115200)
+    dev1 = gsv8("COM22", 115200)
 
     # einen eine Messung anstoßen
     measurement = dev1.ReadValue()
@@ -79,9 +80,9 @@ if __name__ == '__main__':
         print "matrix active"
     else:
         print "matrix inactive"
-
+    dev1.writeDataRate(30.0)
     dev1.StartTransmission()
-
+    dev1.startCSVrecordingWithoutStartTransmisson('./messungen', 'dev1')
     try:
         while (True):
             # Ist IOPin 1 (1.1) High?
@@ -89,7 +90,6 @@ if __name__ == '__main__':
                 # startet die Messwertaufnahme mit 10 Hz und legt eine CSV Datei an, die als Name den aktuellen Timestamp besitzt
                 #dev1.startCSVrecording(10.0, './messungen')
                 dev1.startCSVrecordingWithoutStartTransmisson('./messungen')
-
             # Ist IOPin 2 (1.2) High?
             if (dev1.isPinHigh(2)):
                 #dev1.stopCSVrecording()

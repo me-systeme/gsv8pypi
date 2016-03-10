@@ -54,11 +54,12 @@ import copy
 
 
 class CSVwriter(threading.Thread):
-    def __init__(self, startTimeStampStr, dictListOfMessungen, csvList_lock, path='./messungen/'):
+    def __init__(self, startTimeStampStr, dictListOfMessungen, csvList_lock, recordPrefix = '', path='./messungen/'):
         threading.Thread.__init__(self)
         self.startTimeStampStr = startTimeStampStr
         self.path = path
-        self.filenName = self.path + self.startTimeStampStr + '.csv'
+        self.recordPrefix = recordPrefix;
+        self.filenName = self.path + self.recordPrefix + '_' + self.startTimeStampStr + '.csv'
         csvList_lock.acquire()
         self.dictListOfMessungen = copy.deepcopy(dictListOfMessungen)
         csvList_lock.release()

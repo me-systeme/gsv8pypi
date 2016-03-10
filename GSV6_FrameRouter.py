@@ -109,8 +109,8 @@ class FrameRouter(threading.Thread):
         self.running = False
         FrameRouter.lock.release()
 
-    def startCSVRecording(self, csvFilepath):
-        self.messFrameEventHandler.startRecording(csvFilepath)
+    def startCSVRecording(self, csvFilepath, prefix):
+        self.messFrameEventHandler.startRecording(csvFilepath, prefix)
 
     def stopCSVRecording(self):
         self.messFrameEventHandler.stopRecording()

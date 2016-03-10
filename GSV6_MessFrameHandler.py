@@ -71,6 +71,7 @@ class MessFrameHandler():
         self.messCSVDictList_lock = threading.Lock()
         self.maxCacheMessCount = 1000
         self.startTimeStampStr = ''
+        self.recordPrefix = ''
         self.doRecording = False
         self.messCounter = 0
 
@@ -125,7 +126,7 @@ class MessFrameHandler():
         self.lastMesswert.setVar(measureData)
         logging.getLogger('gsv8.FrameRouter.MessFrameHandler').debug('Received MessFrame added.')
 
-    def startRecording(self, filePath):
+    def startRecording(self, filePath, prefix):
         if(self.doRecording):
             return
         logging.getLogger('gsv8.FrameRouter.MessFrameHandler').info('Messung gestartet.')
@@ -138,6 +139,7 @@ class MessFrameHandler():
         else:
             # set timestamp
             self.startTimeStampStr = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+            self.recordPrefix = prefix
             self.doRecording = True
 
     def stopRecording(self):
@@ -149,5 +151,5 @@ class MessFrameHandler():
 
     def _writeCSVdataNow(self):
         # start csvWriter
-        writer = CSVwriter(self.startTimeStampStr, self.messCSVDictList, self.messCSVDictList_lock, self.csvpath)
+        writer = CSVwriter(self.startTimeStampStr, self.messCSVDictList, self.messCSVDictList_lock, self.recordPrefix, self.csvpath)
         writer.start()

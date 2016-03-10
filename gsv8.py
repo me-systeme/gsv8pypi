@@ -1185,7 +1185,7 @@ class gsv8:
 
         return result
 
-    def startCSVrecordingWithoutStartTransmisson(self, csvFilepath):
+    def startCSVrecordingWithoutStartTransmisson(self, csvFilepath, prefix=''):
         '''
         Start der Messwertaufnahme. Anfallende Messwerte werden in einer CSV-Datei gespeichert.
         Der Dateiname orientiert sich an dem aktuelen Datum und der aktuellen Uhrzeit
@@ -1197,9 +1197,9 @@ class gsv8:
         :param csvFilepath: Zielpfad fuer die CSV-Datei
         :type csvFilepath: String
         '''
-        self.router.startCSVRecording(csvFilepath)
+        self.router.startCSVRecording(csvFilepath, prefix)
 
-    def startCSVrecording(self, csvFilepath):
+    def startCSVrecording(self, csvFilepath, prefix=''):
         '''
         Start der Messwertaufnahme. Anfallende Messwerte werden in einer CSV-Datei gespeichert.
         Der Dateiname orientiert sich an dem aktuelen Datum und der aktuellen Uhrzeit
@@ -1212,10 +1212,10 @@ class gsv8:
         :type csvFilepath: String
         '''
         if not self.router.isRecording():
-            self.router.startCSVRecording(csvFilepath)
+            self.router.startCSVRecording(csvFilepath, prefix)
             self.StartTransmission()
 
-    def startCSVrecording(self, frequenz, csvFilepath):
+    def startCSVrecording(self, frequenz, csvFilepath, prefix=''):
         '''
         Start der Messwertaufnahme. Anfallende Messwerte werden in einer CSV-Datei gespeichert.
         Der Dateiname orientiert sich an dem aktuelen Datum und der aktuellen Uhrzeit
@@ -1231,7 +1231,7 @@ class gsv8:
         '''
         if not self.router.isRecording():
             self.writeDataRate(frequenz)
-            self.router.startCSVRecording(csvFilepath)
+            self.router.startCSVRecording(csvFilepath, prefix)
             self.StartTransmission()
 
     def stopCSVrecordingWithoutStopTransmission(self):

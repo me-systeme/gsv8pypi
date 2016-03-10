@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 """
 Datum 01.2016
-@author: ME-Meßsysteme GmbH, Robert Bremsat, Dennis Rump
+@author: ME-Meßsysteme GmbH, Dennis Rump
 @version 1.2
 """
-from time import sleep
 
-__author__ = 'Robert bremsat & Dennis Rump'
+__author__ = 'Dennis Rump'
 ###############################################################################
 #
 # The MIT License (MIT)
@@ -54,6 +53,8 @@ __author__ = 'Robert bremsat & Dennis Rump'
 ###############################################################################
 
 from gsv8 import gsv8
+import signal
+import sys
 
 if __name__ == '__main__':
     # construct device
@@ -61,6 +62,11 @@ if __name__ == '__main__':
     # dev1 = gsv8("/dev/ttyACM0",115200)
     # Windows
     dev1 = gsv8(21, 115200)
+
+    schwellwert1 = 250.0
+    hysterese_high = 250.0
+    hysterese_low = 240.0
+
 
     # einen eine Messung anstoßen
     measurement = dev1.ReadValue()
@@ -82,20 +88,22 @@ if __name__ == '__main__':
 
     try:
         while (True):
-            # Ist IOPin 1 (1.1) High?
-            if (dev1.isPinHigh(1)):
-                # startet die Messwertaufnahme mit 10 Hz und legt eine CSV Datei an, die als Name den aktuellen Timestamp besitzt
+            # Eine Messung anfordern und Messwert von Kanal1 in einer Variablen speichern
+            messwert = dev1.ReadValue().getChannel1()
+            '''
+            # Aktion auf Schwellwert - Enifache Variante
+            if(messwert >= schwellwert1):
                 dev1.startCSVrecording(10.0, './messungen')
-
-            # Ist IOPin 2 (1.2) High?
-            if (dev1.isPinHigh(2)):
+            else:
                 dev1.stopCSVrecording()
+            '''
 
-            # Wert von DMS-Kanal 1 abfragen
-            if (dev1.ReadValue().getChannel1() < -220.0):
-                print "Wert kleiner -220"
+            # Aktion auf Schwellwert - mit Hysterese
+            if(messwert >= hysterese_high):
+                dev1.startCSVrecording(10.0, './messungen')
+            elif(messwert <= hysterese_low):
+                dev1.stopCSVrecording()
     except KeyboardInterrupt:
-        # wennn Programm durch Tastatur beendet wird, Messung stoppen
         dev1.stopCSVrecording()
     finally:
         # destruct device

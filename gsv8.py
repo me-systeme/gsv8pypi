@@ -946,6 +946,8 @@ class gsv8:
 
         # erstelle zu sendene Bytefolge für SetDIOtype
         output = self._gsvLib.buildSetDIOtype(IOPin, dioType, assignedDMSchannel)
+        # print 'output: ' + ' '.join(format(x, '02x') for x in bytearray(output))
+
 
         # sende Daten via serialport
         self._gsvSerialPort.write(output)
@@ -1032,6 +1034,54 @@ class gsv8:
         # siehe Tabelle Typen der digitalen Ein- und Ausgaenge des GSV-8 pos. 11
         newDIOtype = bytearray([0x01, 0x20, 0x00])
         return self.setDIOtype(IOPin, newDIOtype, assignedDMSchannel)
+
+    def setInputToTaraInputForAllChannels(self, IOPin):
+        '''
+        Setzt DIOtype für den angegeben IO Pin
+        Der gewaehlte IOPin muss im Vorfeld als Eingang (Input) konfiguriert werden. Wird dieser Eingang high, wird Tara für alle DMS-Eingaenge aufgerufen
+
+        :param IOPin: IOPin 1..16 (1.1 - 4.4)
+        :type IOPin: uint8
+        :return: AntwortErrorCode und AntwortErrorText
+        :rtype: liste
+        '''
+
+        # siehe Tabelle Typen der digitalen Ein- und Ausgaenge des GSV-8 pos. 11
+
+        newDIOtype = bytearray([0x00, 0x00, 0x20])
+        return self.setDIOtype(IOPin, newDIOtype, 0)
+
+    def setInputToTaraInputForChannel(self, IOPin, assignedDMSchannel):
+        '''
+        Setzt DIOtype für den angegeben IO Pin
+        Der gewaehlte IOPin muss im Vorfeld als Eingang (Input) konfiguriert werden. Wird dieser Eingang high, wird für den gewaehlte DMS-Eingang Tara aufgerufen
+
+        :param IOPin: IOPin 1..16 (1.1 - 4.4)
+        :param assignedDMSchannel: zugehoeriger DMS-Kanal; default=0
+        :type IOPin: uint8
+        :type assignedDMSchannel: uint8
+        :return: AntwortErrorCode und AntwortErrorText
+        :rtype: liste
+        '''
+
+        # siehe Tabelle Typen der digitalen Ein- und Ausgaenge des GSV-8 pos. 11
+        newDIOtype = bytearray([0x00, 0x00, 0x10])
+        return self.setDIOtype(IOPin, newDIOtype, assignedDMSchannel)
+
+    def setStartTransmissionByInputIsHigh(self, IOPin):
+        '''
+        Setzt DIOtype für den angegeben IO Pin
+        Der gewaehlte IOPin muss im Vorfeld als Eingang (Input) konfiguriert werden. Wird dieser Eingang high, versendet der GSV8 mit der konfigurierten Datenrate Messwert-Frames
+
+        :param IOPin: IOPin 1..16 (1.1 - 4.4)
+        :type IOPin: uint8
+        :return: AntwortErrorCode und AntwortErrorText
+        :rtype: liste
+        '''
+
+        # siehe Tabelle Typen der digitalen Ein- und Ausgaenge des GSV-8 pos. 11
+        newDIOtype = bytearray([0x00, 0x08, 0x00])
+        return self.setDIOtype(IOPin, newDIOtype, 0)
 
     def setDIOtoGenralPurposeInput(self, IOPin):
         '''
@@ -1128,6 +1178,36 @@ class gsv8:
 
         return result
 
+    def startCSVrecordingWithoutStartTransmisson(self, csvFilepath):
+        '''
+        Start der Messwertaufnahme. Anfallende Messwerte werden in einer CSV-Datei gespeichert.
+        Der Dateiname orientiert sich an dem aktuelen Datum und der aktuellen Uhrzeit
+
+        *Achtung* Es wird KEIN StartTransmission aufgerufen!
+
+        *Achtung* CSV-Dateipfad muss vorhanden sein!
+
+        :param csvFilepath: Zielpfad fuer die CSV-Datei
+        :type csvFilepath: String
+        '''
+        self.router.startCSVRecording(csvFilepath)
+
+    def startCSVrecording(self, csvFilepath):
+        '''
+        Start der Messwertaufnahme. Anfallende Messwerte werden in einer CSV-Datei gespeichert.
+        Der Dateiname orientiert sich an dem aktuelen Datum und der aktuellen Uhrzeit
+
+        *Achtung* Es wird StartTransmission aufgerufen!
+
+        *Achtung* CSV-Dateipfad muss vorhanden sein!
+
+        :param csvFilepath: Zielpfad fuer die CSV-Datei
+        :type csvFilepath: String
+        '''
+        self.router.startCSVRecording(csvFilepath)
+
+        self.StartTransmission()
+
     def startCSVrecording(self, frequenz, csvFilepath):
         '''
         Start der Messwertaufnahme. Anfallende Messwerte werden in einer CSV-Datei gespeichert.
@@ -1147,6 +1227,15 @@ class gsv8:
         self.router.startCSVRecording(csvFilepath)
 
         self.StartTransmission()
+
+    def stopCSVrecordingWithoutStopTransmission(self):
+        '''
+        Stoppt die Messwertaufnahme.
+
+        *Achtung* Es wird KEIN StopTransmission aufgerufen!
+        '''
+
+        self.router.stopCSVRecording()
 
     def stopCSVrecording(self):
         '''

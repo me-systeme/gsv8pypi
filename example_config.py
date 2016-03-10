@@ -55,7 +55,9 @@ from gsv8 import gsv8
 
 if __name__ == '__main__':
     # construct device
+    # Unix
     # dev1 = gsv8("/dev/ttyACM0",115200)
+    # Windows
     dev1 = gsv8(21, 115200)
 
     # ausgabetyp setzten
@@ -63,16 +65,14 @@ if __name__ == '__main__':
     if(dev1.isResultOk(result)):
         print "setTXmodefloat erfolgreich"
 
-    # datenrate veraendern
-    print 'aktuelle Datenrate: {}'.format(dev1.readDataRate())
-
     # Datenrate setzten
-    result = dev1.writeDataRate(20.0)
+    result = dev1.writeDataRate(30.0)
     # Ergebnis pruefen
     if(dev1.isResultOk(result)):
         print "writeDataRate erfolgreich"
 
-    # dev1.writeDataRate(20.0)
+    # datenrate veraendern
+    print 'aktuelle Datenrate: {} Hz'.format(dev1.readDataRate())
 
     # Skalierung der Kanael 1 bis 6 werden durch das Laden der Kalibriermatrix gesetzt
 
@@ -107,6 +107,9 @@ if __name__ == '__main__':
         print "setDIOgroupToOutput  fuer Gruppe 4 erfolgreich"
 
 
+    dev1.setInputToTaraInputForAllChannels(3);
+    dev1.setStartTransmissionByInputIsHigh(4);
+
     # Beispiel zum erfragen der aktuellen Einstellung der DIO Gruppe
     '''
     if(dev1.isDIOgroupInput(1)):
@@ -128,18 +131,18 @@ if __name__ == '__main__':
     dev1.setOutputHighIfOutsideWindow(13,5)
     # IOPin 14 (4.2) soll auf Kanal 6 reagieren
     dev1.setOutputHighIfOutsideWindow(14,6)
-    # IOPin 15 (4.3) soll auf Kanal 7 reagieren
-    dev1.setOutputHighIfOutsideWindow(15,7)
-    # IOPin 16 (4.4) soll auf Kanal 8 reagieren
-    dev1.setOutputHighIfOutsideWindow(16,8)
+    # IOPin 15 (4.3) soll auf Kanal 1 reagieren
+    dev1.setOutputHighIfOutsideWindow(15,1)
+    # IOPin 16 (4.4) soll auf Kanal 7 reagieren
+    dev1.setOutputHighIfOutsideWindow(16,7)
 
     # lesen und schreiben des oberen oder unteren Schwellwertes
     print 'unterer Schwellwert fuer DMS-Kanal 1: {}'.format(dev1.readLowerDIOthreshold(9))
     print 'oberer  Schwellwert fuer DMS-Kanal 1: {}'.format(dev1.readUpperDIOthreshold(9))
 
     # Schwellwerte fuer Fx
-    dev1.writeLowerDIOthreshold(9,-250.0)
-    dev1.writeUpperDIOthreshold(9,+250.0)
+    dev1.writeLowerDIOthreshold(9,-10.0)
+    dev1.writeUpperDIOthreshold(9,+10.0)
     # Schwellwerte fuer Fy
     dev1.writeLowerDIOthreshold(10,-250.0)
     dev1.writeUpperDIOthreshold(10,+250.0)
@@ -157,9 +160,13 @@ if __name__ == '__main__':
     dev1.writeLowerDIOthreshold(14,-10.0)
     dev1.writeUpperDIOthreshold(14,+10.0)
 
+    # Schwellwerte fuer Mz
+    dev1.writeLowerDIOthreshold(15,-10.0)
+    dev1.writeUpperDIOthreshold(15,+10.0)
+
     # Schwellwerte fuer DMS Kanal 7
-    dev1.writeLowerDIOthreshold(15,-2500.0)
-    dev1.writeUpperDIOthreshold(15,+2500.0)
+    dev1.writeLowerDIOthreshold(16,-2500.0)
+    dev1.writeUpperDIOthreshold(16,+2500.0)
 
 
     # Verrechnungsmatrix aktivieren

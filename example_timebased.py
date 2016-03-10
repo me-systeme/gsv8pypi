@@ -4,8 +4,6 @@ Datum 01.2016
 @author: ME-Meßsysteme GmbH, Robert Bremsat, Dennis Rump
 @version 1.2
 """
-from time import sleep
-
 __author__ = 'Robert bremsat & Dennis Rump'
 ###############################################################################
 #
@@ -54,13 +52,17 @@ __author__ = 'Robert bremsat & Dennis Rump'
 ###############################################################################
 
 from gsv8 import gsv8
+from datetime import datetime
 
 if __name__ == '__main__':
     # construct device
     # Unix
     # dev1 = gsv8("/dev/ttyACM0",115200)
     # Windows
-    dev1 = gsv8(21, 115200)
+    # dev1 = gsv8("COM26", 115200)
+    dev1 = gsv8("COM26", 115200)
+
+    print "test: " + ' '.join(format(x, '02x') for x in bytearray(dev1.isPinHigh(1)))
 
     # einen eine Messung anstoßen
     measurement = dev1.ReadValue()
@@ -71,29 +73,43 @@ if __name__ == '__main__':
     print 'Kanal 1: {}'.format(measurement2.getChannel1())
     print measurement2.toString()
 
-    print 'is Pin 1 high?: {}'.format(dev1.isPinHigh(1))
-    print 'is Pin 2 low?: {}'.format(dev1.isPinLow(2))
+    #dev1.writeDataRate(100.0)
+    '''
+    dev1.setDIOdirection(9,1);
+    dev1.setDIOdirection(10,1);
+    dev1.setDIOdirection(1,0);
+    dev1.setDIOdirection(2,0);
+    dev1.setDIOinitialLevel(1,1);
+    dev1.setDIOinitialLevel(2,0);
+    dev1.setDIOinitialLevel(10,0);
+    dev1.StartTransmission()
+    '''
 
-    # ist die Verrechnungsmatrix aktiv?
-    if (dev1.isSixAxisMatrixActive()):
-        print "matrix active"
-    else:
-        print "matrix inactive"
+    # dev1.startCSVrecording(10.0, './messungen')
 
+    actTime = lastTime = datetime.now()
+    diffTime = actTime - lastTime
     try:
-        while (True):
-            # Ist IOPin 1 (1.1) High?
-            if (dev1.isPinHigh(1)):
-                # startet die Messwertaufnahme mit 10 Hz und legt eine CSV Datei an, die als Name den aktuellen Timestamp besitzt
-                dev1.startCSVrecording(10.0, './messungen')
-
-            # Ist IOPin 2 (1.2) High?
-            if (dev1.isPinHigh(2)):
-                dev1.stopCSVrecording()
-
-            # Wert von DMS-Kanal 1 abfragen
-            if (dev1.ReadValue().getChannel1() < -220.0):
-                print "Wert kleiner -220"
+        while(True):
+            actTime = datetime.now()
+            diffTime = actTime - lastTime
+            if(diffTime.seconds >= 0 and diffTime.microseconds>=10000):
+                # print datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+                # print diffTime
+                measurement2 = dev1.ReadValue()
+                # print 'Kanal 1: {}'.format(measurement2.getChannel1())
+                if(dev1.isPinHigh(9)):
+                    # print "JA"
+                    dev1.setPinToHigh(1);
+                    dev1.setPinToLow(2);
+                else:
+                    dev1.setPinToHigh(2);
+                    dev1.setPinToLow(1);
+                    # print "NEIN"
+                # print measurement2.toString()
+                actTime = lastTime = datetime.now()
+            elif (diffTime.seconds > 0):
+                actTime = lastTime = datetime.now()
     except KeyboardInterrupt:
         # wennn Programm durch Tastatur beendet wird, Messung stoppen
         dev1.stopCSVrecording()

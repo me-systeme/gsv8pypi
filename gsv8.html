@@ -36,13 +36,8 @@
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="Stichwortverzeichnis"
-             accesskey="I">Index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python-Modulindex"
-             >Module</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">GSV-8PyPi 1.0.0 Dokumentation</a> &raquo;</li> 
+        
+        <li class="nav-item nav-item-0">GSV-8PyPi 1.0.0 Dokumentation &raquo;</li> 
       </ul>
     </div>
       
@@ -54,10 +49,7 @@
             
   <div class="section" id="module-gsv8">
 <span id="gsv8-module"></span><h1>gsv8 module<a class="headerlink" href="#module-gsv8" title="Link zu dieser Überschrift">¶</a></h1>
-<p>Datum 01.2016
-&#64;author: ME-Meßsysteme GmbH, Robert Bremsat, Dennis Rump
-&#64;version 1.2</p>
-
+<p>Datum 03.2016, ME-Meßsysteme GmbH, Robert Bremsat, Dennis Rump</p>
 
 <dl class="class">
 <dt id="gsv8.gsv8">
@@ -145,6 +137,22 @@ Verwenden Sie getValue um einzel Werte abzurufen.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="gsv8.gsv8.get1wireTempValue">
+<code class="descname">get1wireTempValue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.get1wireTempValue" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Die Methode get1wireTempValue holt 1wire temp value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Rückgabe:</th><td class="field-body">Tempvalue</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabetyp:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="gsv8.gsv8.getDIOdirection">
 <code class="descname">getDIOdirection</code><span class="sig-paren">(</span><em>gruppe</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.getDIOdirection" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Ruft die DIOdirection vom GSV ab</p>
@@ -157,6 +165,24 @@ Verwenden Sie getValue um einzel Werte abzurufen.</p>
 <tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">AntwortCode und AntwortErrorText</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">liste</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gsv8.gsv8.getDIOinitialLevel">
+<code class="descname">getDIOinitialLevel</code><span class="sig-paren">(</span><em>IOPin</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.getDIOinitialLevel" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Ruft das jeweilige initial DIOlevel vom GSV ab</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>IOPin</strong> (<em>uint8</em>) &#8211; IOPin 1..16 (1.1 - 4.4)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">0 wenn Low; 1 wenn high</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">uint8</td>
 </tr>
 </tbody>
 </table>
@@ -439,6 +465,31 @@ Verwenden Sie getValue um einzel Werte abzurufen.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="gsv8.gsv8.setDIOinitialLevel">
+<code class="descname">setDIOinitialLevel</code><span class="sig-paren">(</span><em>IOPin</em>, <em>level</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.setDIOinitialLevel" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Setzt das DIO level am gewünschten Pin
+level 1 = high 0 low</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
+<li><strong>IOPin</strong> (<em>uint8</em>) &#8211; IOPin 1..16 (1.1 - 4.4)</li>
+<li><strong>level</strong> (<em>uint8</em>) &#8211; high=1; low=0</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">AntwortErrorCode und AntwortErrorText</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first last">liste</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="gsv8.gsv8.setDIOlevel">
 <code class="descname">setDIOlevel</code><span class="sig-paren">(</span><em>IOPin</em>, <em>level</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.setDIOlevel" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Setzt das DIO level am gewünschten Pin
@@ -524,6 +575,50 @@ Fuer den gewaehlte IOPin wird der DIOtype Genral-Purpose Out gesetzt</p>
 <tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
 <li><strong>IOPin</strong> (<em>uint8</em>) &#8211; IOPin 1..16 (1.1 - 4.4)</li>
 <li><strong>dioType</strong> (<em>uint8</em>) &#8211; DIO Type aus Datenblatt</li>
+<li><strong>assignedDMSchannel</strong> (<em>uint8</em>) &#8211; zugehoeriger DMS-Kanal; default=0</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">AntwortErrorCode und AntwortErrorText</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first last">liste</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gsv8.gsv8.setInputToTaraInputForAllChannels">
+<code class="descname">setInputToTaraInputForAllChannels</code><span class="sig-paren">(</span><em>IOPin</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.setInputToTaraInputForAllChannels" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Setzt DIOtype für den angegeben IO Pin
+Der gewaehlte IOPin muss im Vorfeld als Eingang (Input) konfiguriert werden. Wird dieser Eingang high, wird Tara für alle DMS-Eingaenge aufgerufen</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>IOPin</strong> (<em>uint8</em>) &#8211; IOPin 1..16 (1.1 - 4.4)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">AntwortErrorCode und AntwortErrorText</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">liste</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gsv8.gsv8.setInputToTaraInputForChannel">
+<code class="descname">setInputToTaraInputForChannel</code><span class="sig-paren">(</span><em>IOPin</em>, <em>assignedDMSchannel</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.setInputToTaraInputForChannel" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Setzt DIOtype für den angegeben IO Pin
+Der gewaehlte IOPin muss im Vorfeld als Eingang (Input) konfiguriert werden. Wird dieser Eingang high, wird für den gewaehlte DMS-Eingang Tara aufgerufen</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
+<li><strong>IOPin</strong> (<em>uint8</em>) &#8211; IOPin 1..16 (1.1 - 4.4)</li>
 <li><strong>assignedDMSchannel</strong> (<em>uint8</em>) &#8211; zugehoeriger DMS-Kanal; default=0</li>
 </ul>
 </td>
@@ -737,6 +832,25 @@ Der gewaehlte IOPin wird als Output konfiguriert, hierbei ist die Gruppenrichtun
 </dd></dl>
 
 <dl class="method">
+<dt id="gsv8.gsv8.setStartTransmissionByInputIsHigh">
+<code class="descname">setStartTransmissionByInputIsHigh</code><span class="sig-paren">(</span><em>IOPin</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.setStartTransmissionByInputIsHigh" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Setzt DIOtype für den angegeben IO Pin
+Der gewaehlte IOPin muss im Vorfeld als Eingang (Input) konfiguriert werden. Wird dieser Eingang high, versendet der GSV8 mit der konfigurierten Datenrate Messwert-Frames</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>IOPin</strong> (<em>uint8</em>) &#8211; IOPin 1..16 (1.1 - 4.4)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">AntwortErrorCode und AntwortErrorText</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">liste</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="gsv8.gsv8.setTXmodefloat">
 <code class="descname">setTXmodefloat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.setTXmodefloat" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Setzt float als Messwert-Datenformat</p>
@@ -799,10 +913,34 @@ Der Dateiname orientiert sich an dem aktuelen Datum und der aktuellen Uhrzeit</p
 </dd></dl>
 
 <dl class="method">
+<dt id="gsv8.gsv8.startCSVrecordingWithoutStartTransmisson">
+<code class="descname">startCSVrecordingWithoutStartTransmisson</code><span class="sig-paren">(</span><em>csvFilepath</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.startCSVrecordingWithoutStartTransmisson" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Start der Messwertaufnahme. Anfallende Messwerte werden in einer CSV-Datei gespeichert.
+Der Dateiname orientiert sich an dem aktuelen Datum und der aktuellen Uhrzeit</p>
+<p><em>Achtung</em> Es wird KEIN StartTransmission aufgerufen!</p>
+<p><em>Achtung</em> CSV-Dateipfad muss vorhanden sein!</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>csvFilepath</strong> (<em>String</em>) &#8211; Zielpfad fuer die CSV-Datei</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="gsv8.gsv8.stopCSVrecording">
 <code class="descname">stopCSVrecording</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.stopCSVrecording" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Stoppt die Messwertaufnahme.</p>
 <p><em>Achtung</em> Es wird StopTransmission aufgerufen!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gsv8.gsv8.stopCSVrecordingWithoutStopTransmission">
+<code class="descname">stopCSVrecordingWithoutStopTransmission</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.stopCSVrecordingWithoutStopTransmission" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Stoppt die Messwertaufnahme.</p>
+<p><em>Achtung</em> Es wird KEIN StopTransmission aufgerufen!</p>
 </dd></dl>
 
 <dl class="method">
@@ -909,13 +1047,7 @@ Der Dateiname orientiert sich an dem aktuelen Datum und der aktuellen Uhrzeit</p
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="Stichwortverzeichnis"
-             >Index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python-Modulindex"
-             >Module</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">GSV-8PyPi 1.0.0 Dokumentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0">GSV-8PyPi 1.0.0 Dokumentation &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

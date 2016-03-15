@@ -91,6 +91,7 @@ class FrameRouter(threading.Thread):
                 logging.getLogger('gsv8.FrameRouter').debug('new Frame: ' + newFrame.toString())
                 if newFrame.getFrameType() == 0:
                     # MesswertFrame
+                    logging.getLogger('gsv8.FrameRouter').debug('Messwert erhalten')
                     self.messFrameEventHandler.computeFrame(newFrame)
                 elif newFrame.getFrameType() == 1:
                     logging.getLogger('gsv8').debug("Antwort eralten.")

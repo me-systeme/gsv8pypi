@@ -87,7 +87,7 @@ class MessFrameHandler():
         counter = 0
         for f in values:
             # there is no append/add function for Python Dictionaries
-            measuredValues[u'channel' + str(counter)] = f
+            measuredValues['channel' + str(counter)] = f
             counter += 1
         if frame.isMesswertInputOverload():
             inputOverload = True
@@ -119,6 +119,7 @@ class MessFrameHandler():
                 self.messCounter = 0
                 # semaphore lock?
                 self._writeCSVdataNow()
+                del self.messCSVDictList[:]
 
         # add new measure data to queue
         measureData = [timestamp, measuredValues, inputOverload, sixAxisError]
@@ -147,6 +148,7 @@ class MessFrameHandler():
             logging.getLogger('gsv8.FrameRouter.MessFrameHandler').info('Messung gestopt.')
             if (len(self.messCSVDictList) > 0):
                 self._writeCSVdataNow()
+            del self.messCSVDictList[:]
         self.doRecording = False
 
     def _writeCSVdataNow(self):

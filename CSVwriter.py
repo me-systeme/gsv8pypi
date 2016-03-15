@@ -59,7 +59,7 @@ class CSVwriter(threading.Thread):
         self.startTimeStampStr = startTimeStampStr
         self.path = path
         self.recordPrefix = recordPrefix;
-        self.filenName = self.path + self.recordPrefix + '_' + self.startTimeStampStr + '.csv'
+        self.filenName = self.path + self.recordPrefix + self.startTimeStampStr + '.csv'
         csvList_lock.acquire()
         self.dictListOfMessungen = copy.deepcopy(dictListOfMessungen)
         csvList_lock.release()
@@ -80,10 +80,9 @@ class CSVwriter(threading.Thread):
                                    'channel2': 'channel2', 'channel3': 'channel3', 'channel4': 'channel4',
                                    'channel5': 'channel5', 'channel6': 'channel6', 'channel7': 'channel7'}
                     writer.writerow(headernames)
-                    writer.writerows(self.dictListOfMessungen)
+                writer.writerows(self.dictListOfMessungen)
             except Exception, e:
                 logging.getLogger('gsv8.router.MessFrameHandler.CSVwriter').critical(
                     'stopping measurement, can\'t write data! Error: ' + str(e))
 
             del self.dictListOfMessungen[:]
-            logging.getLogger('gsv8.router.MessFrameHandler.CSVwriter').debug('CSV-File written.')

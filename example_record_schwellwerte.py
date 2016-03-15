@@ -103,7 +103,7 @@ if __name__ == '__main__':
 
             # Aktion auf Schwellwert - mit Hysterese
             if(messwert >= hysterese_high):
-                dev1.startCSVrecordingWithoutStartTransmisson('./messungen')
+                dev1.startCSVrecordingWithoutStartTransmisson('./messungen', 'dev1_')
             elif(messwert <= hysterese_low):
                 dev1.stopCSVrecordingWithoutStopTransmission()
     except KeyboardInterrupt:

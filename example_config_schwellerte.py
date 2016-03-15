@@ -61,7 +61,7 @@ if __name__ == '__main__':
     # dev1 = gsv8(21, 115200)
 
     # Datenrate setzten
-    result = dev1.writeDataRate(30.0)
+    result = dev1.writeDataRate(50.0)
     # Ergebnis pruefen
     if(dev1.isResultOk(result)):
         print "writeDataRate erfolgreich"
@@ -95,7 +95,8 @@ if __name__ == '__main__':
 
 
     dev1.setInputToTaraInputForAllChannels(3);
-    dev1.setStartTransmissionByInputIsHigh(4);
+    #dev1.setStartTransmissionByInputIsHigh(4);
+    dev1.setDIOtoGenralPurposeInput(4);
 
     # Nun reaktion auf die Schwellwerte konfigurieren
     # IOPin 9 (3.1) soll auf Kanal 1 reagieren

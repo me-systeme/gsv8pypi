@@ -36,12 +36,9 @@
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
-        
-        <li class="nav-item nav-item-0">GSV-8PyPi 1.0.0 Dokumentation &raquo;</li> 
+        <li class="nav-item nav-item-0">GSV-8PyPi 1.0.0 Dokumentation&raquo;</li> 
       </ul>
     </div>
-      
-
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
@@ -49,8 +46,7 @@
             
   <div class="section" id="module-gsv8">
 <span id="gsv8-module"></span><h1>gsv8 module<a class="headerlink" href="#module-gsv8" title="Link zu dieser Überschrift">¶</a></h1>
-<p>Datum 03.2016, ME-Meßsysteme GmbH, Robert Bremsat, Dennis Rump</p>
-
+<p>Datum 03.2016: ME-Meßsysteme GmbH, Robert Bremsat, Dennis Rump</p>
 <dl class="class">
 <dt id="gsv8.gsv8">
 <em class="property">class </em><code class="descclassname">gsv8.</code><code class="descname">gsv8</code><span class="sig-paren">(</span><em>port</em>, <em>baudrate</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8" title="Link zu dieser Definition">¶</a></dt>
@@ -217,6 +213,144 @@ Verwenden Sie getValue um einzel Werte abzurufen.</p>
 <tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>IOPin</strong> (<em>uint8</em>) &#8211; IOPin 1..16 (1.1 - 4.4)</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">assignedDMSchannel und DIOtype</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">liste</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gsv8.gsv8.getInputType">
+<code class="descname">getInputType</code><span class="sig-paren">(</span><em>channel</em>, <em>inputType</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.getInputType" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>holt den aktuellen Messbereiche für den angegeben InputType</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
+<li><strong>channel</strong> (<em>uint8</em>) &#8211; zugehoeriger DMS-Kanal</li>
+<li><strong>InputType</strong> (<em>uint8</em>) &#8211; InputType aus Datenblatt</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">AntwortErrorCode und AntwortErrorText</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first last">liste</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gsv8.gsv8.getInputTypeForBridge_2_5V">
+<code class="descname">getInputTypeForBridge_2_5V</code><span class="sig-paren">(</span><em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.getInputTypeForBridge_2_5V" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Holt den aktuellen Messbereiche
+Fuer Brueckensensoren mi eienr Speisespannung von 8,75V</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>channel</strong> (<em>uint8</em>) &#8211; DMS Kanal 1..8 oder 0 für alle</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">AntwortErrorCode und AntwortErrorText</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">liste</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gsv8.gsv8.getInputTypeForBridge_5V">
+<code class="descname">getInputTypeForBridge_5V</code><span class="sig-paren">(</span><em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.getInputTypeForBridge_5V" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Holt den aktuellen Messbereiche
+Fuer Brueckensensoren mi eienr Speisespannung von 8,75V</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>channel</strong> (<em>uint8</em>) &#8211; DMS Kanal 1..8 oder 0 für alle</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">AntwortErrorCode und AntwortErrorText</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">liste</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gsv8.gsv8.getInputTypeForBridge_8_75V">
+<code class="descname">getInputTypeForBridge_8_75V</code><span class="sig-paren">(</span><em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.getInputTypeForBridge_8_75V" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Holt den aktuellen Messbereiche
+Fuer Brueckensensoren mi eienr Speisespannung von 8,75V</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>channel</strong> (<em>uint8</em>) &#8211; DMS Kanal 1..8 oder 0 für alle</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">AntwortErrorCode und AntwortErrorText</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">liste</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gsv8.gsv8.getInputTypeForSingle_Ended">
+<code class="descname">getInputTypeForSingle_Ended</code><span class="sig-paren">(</span><em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.getInputTypeForSingle_Ended" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Holt den aktuellen Messbereiche
+Fuer Signle-ended</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>channel</strong> (<em>uint8</em>) &#8211; DMS Kanal 1..8 oder 0 für alle</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">AntwortErrorCode und AntwortErrorText</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">liste</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gsv8.gsv8.getInputTypeForTemp_K_Type">
+<code class="descname">getInputTypeForTemp_K_Type</code><span class="sig-paren">(</span><em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.getInputTypeForTemp_K_Type" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Holt den aktuellen Messbereiche
+Fuer Temperatursensor K-Type</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>channel</strong> (<em>uint8</em>) &#8211; DMS Kanal 1..8 oder 0 für alle</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">AntwortErrorCode und AntwortErrorText</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">liste</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gsv8.gsv8.getInputTypeForTemp_PT1000">
+<code class="descname">getInputTypeForTemp_PT1000</code><span class="sig-paren">(</span><em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.getInputTypeForTemp_PT1000" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Holt den aktuellen Messbereiche
+Fuer Temperatursensor PT1000</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>channel</strong> (<em>uint8</em>) &#8211; DMS Kanal 1..8 oder 0 für alle</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">AntwortErrorCode und AntwortErrorText</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">liste</td>
 </tr>
@@ -634,6 +768,144 @@ Der gewaehlte IOPin muss im Vorfeld als Eingang (Input) konfiguriert werden. Wir
 </dd></dl>
 
 <dl class="method">
+<dt id="gsv8.gsv8.setInputType">
+<code class="descname">setInputType</code><span class="sig-paren">(</span><em>channel</em>, <em>inputType</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.setInputType" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Setzt InputType für den angegeben DMS Kanal</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><ul class="first simple">
+<li><strong>channel</strong> (<em>uint8</em>) &#8211; zugehoeriger DMS-Kanal</li>
+<li><strong>InputType</strong> (<em>uint8</em>) &#8211; InputType aus Datenblatt</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body"><p class="first">AntwortErrorCode und AntwortErrorText</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body"><p class="first last">liste</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gsv8.gsv8.setInputTypeToBridge_2_5V">
+<code class="descname">setInputTypeToBridge_2_5V</code><span class="sig-paren">(</span><em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.setInputTypeToBridge_2_5V" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Setzt InputType für den angegeben DMS Kanal
+Fuer Brueckensensoren mi eienr Speisespannung von 2,5V</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>channel</strong> (<em>uint8</em>) &#8211; DMS Kanal 1..8 oder 0 für alle</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">AntwortErrorCode und AntwortErrorText</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">liste</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gsv8.gsv8.setInputTypeToBridge_5V">
+<code class="descname">setInputTypeToBridge_5V</code><span class="sig-paren">(</span><em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.setInputTypeToBridge_5V" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Setzt InputType für den angegeben DMS Kanal
+Fuer Brueckensensoren mi eienr Speisespannung von 5V</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>channel</strong> (<em>uint8</em>) &#8211; DMS Kanal 1..8 oder 0 für alle</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">AntwortErrorCode und AntwortErrorText</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">liste</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gsv8.gsv8.setInputTypeToBridge_8_75V">
+<code class="descname">setInputTypeToBridge_8_75V</code><span class="sig-paren">(</span><em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.setInputTypeToBridge_8_75V" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Setzt InputType für den angegeben DMS Kanal
+Fuer Brueckensensoren mi eienr Speisespannung von 8,75V</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>channel</strong> (<em>uint8</em>) &#8211; DMS Kanal 1..8 oder 0 für alle</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">AntwortErrorCode und AntwortErrorText</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">liste</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gsv8.gsv8.setInputTypeToSingle_Ended">
+<code class="descname">setInputTypeToSingle_Ended</code><span class="sig-paren">(</span><em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.setInputTypeToSingle_Ended" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Setzt InputType für den angegeben DMS Kanal
+Fuer Single-ended</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>channel</strong> (<em>uint8</em>) &#8211; DMS Kanal 1..8 oder 0 für alle</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">AntwortErrorCode und AntwortErrorText</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">liste</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gsv8.gsv8.setInputTypeToTEMP_PT1000">
+<code class="descname">setInputTypeToTEMP_PT1000</code><span class="sig-paren">(</span><em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.setInputTypeToTEMP_PT1000" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Setzt InputType für den angegeben DMS Kanal
+Fuer Temperatursensor PT1000</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>channel</strong> (<em>uint8</em>) &#8211; DMS Kanal 1..8 oder 0 für alle</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">AntwortErrorCode und AntwortErrorText</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">liste</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gsv8.gsv8.setInputTypeToTemp_K_Type">
+<code class="descname">setInputTypeToTemp_K_Type</code><span class="sig-paren">(</span><em>channel</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.setInputTypeToTemp_K_Type" title="Link zu dieser Definition">¶</a></dt>
+<dd><p>Setzt InputType für den angegeben DMS Kanal
+Fuer Temperatursensor K-Type</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameter:</th><td class="field-body"><strong>channel</strong> (<em>uint8</em>) &#8211; DMS Kanal 1..8 oder 0 für alle</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Rückgabe:</th><td class="field-body">AntwortErrorCode und AntwortErrorText</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rückgabetyp:</th><td class="field-body">liste</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="gsv8.gsv8.setOutputHighByThreshold">
 <code class="descname">setOutputHighByThreshold</code><span class="sig-paren">(</span><em>IOPin</em>, <em>assignedDMSchannel</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.setOutputHighByThreshold" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Setzt DIOtype für den angegeben IO Pin
@@ -851,22 +1123,6 @@ Der gewaehlte IOPin muss im Vorfeld als Eingang (Input) konfiguriert werden. Wir
 </dd></dl>
 
 <dl class="method">
-<dt id="gsv8.gsv8.setTXmodefloat">
-<code class="descname">setTXmodefloat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.setTXmodefloat" title="Link zu dieser Definition">¶</a></dt>
-<dd><p>Setzt float als Messwert-Datenformat</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Rückgabe:</th><td class="field-body">AntwortCode und AntwortErrorText</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Rückgabetyp:</th><td class="field-body">the return type description</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
 <dt id="gsv8.gsv8.setUserScaleBySensor">
 <code class="descname">setUserScaleBySensor</code><span class="sig-paren">(</span><em>kanal</em>, <em>sensor_messbereich</em>, <em>sensor_kennwert</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.setUserScaleBySensor" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Errechnet und setzt einen neuen ScalierungsFaktor fuer den jeweiligen DMS-Kanal</p>
@@ -893,7 +1149,7 @@ Der gewaehlte IOPin muss im Vorfeld als Eingang (Input) konfiguriert werden. Wir
 
 <dl class="method">
 <dt id="gsv8.gsv8.startCSVrecording">
-<code class="descname">startCSVrecording</code><span class="sig-paren">(</span><em>frequenz</em>, <em>csvFilepath</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.startCSVrecording" title="Link zu dieser Definition">¶</a></dt>
+<code class="descname">startCSVrecording</code><span class="sig-paren">(</span><em>frequenz</em>, <em>csvFilepath</em>, <em>prefix=''</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.startCSVrecording" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Start der Messwertaufnahme. Anfallende Messwerte werden in einer CSV-Datei gespeichert.
 Der Dateiname orientiert sich an dem aktuelen Datum und der aktuellen Uhrzeit</p>
 <p><em>Achtung</em> Es wird StartTransmission aufgerufen!</p>
@@ -914,7 +1170,7 @@ Der Dateiname orientiert sich an dem aktuelen Datum und der aktuellen Uhrzeit</p
 
 <dl class="method">
 <dt id="gsv8.gsv8.startCSVrecordingWithoutStartTransmisson">
-<code class="descname">startCSVrecordingWithoutStartTransmisson</code><span class="sig-paren">(</span><em>csvFilepath</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.startCSVrecordingWithoutStartTransmisson" title="Link zu dieser Definition">¶</a></dt>
+<code class="descname">startCSVrecordingWithoutStartTransmisson</code><span class="sig-paren">(</span><em>csvFilepath</em>, <em>prefix=''</em><span class="sig-paren">)</span><a class="headerlink" href="#gsv8.gsv8.startCSVrecordingWithoutStartTransmisson" title="Link zu dieser Definition">¶</a></dt>
 <dd><p>Start der Messwertaufnahme. Anfallende Messwerte werden in einer CSV-Datei gespeichert.
 Der Dateiname orientiert sich an dem aktuelen Datum und der aktuellen Uhrzeit</p>
 <p><em>Achtung</em> Es wird KEIN StartTransmission aufgerufen!</p>
@@ -942,6 +1198,11 @@ Der Dateiname orientiert sich an dem aktuelen Datum und der aktuellen Uhrzeit</p
 <dd><p>Stoppt die Messwertaufnahme.</p>
 <p><em>Achtung</em> Es wird KEIN StopTransmission aufgerufen!</p>
 </dd></dl>
+
+<dl class="attribute">
+<dt id="gsv8.gsv8.transmissionIsRunning">
+<code class="descname">transmissionIsRunning</code><em class="property"> = True</em><a class="headerlink" href="#gsv8.gsv8.transmissionIsRunning" title="Link zu dieser Definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="gsv8.gsv8.writeDIOthreshold">
@@ -1047,7 +1308,7 @@ Der Dateiname orientiert sich an dem aktuelen Datum und der aktuellen Uhrzeit</p
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
-        <li class="nav-item nav-item-0">GSV-8PyPi 1.0.0 Dokumentation &raquo;</li> 
+        <li class="nav-item nav-item-0">GSV-8PyPi 1.0.0 Dokumentation&raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

@@ -59,13 +59,13 @@ import sys
 if __name__ == '__main__':
     # construct device
     # Unix
-    # dev1 = gsv8("/dev/ttyACM0",115200)
+    dev1 = gsv8("/dev/ttyACM0",115200)
     # Windows
-    dev1 = gsv8(21, 115200)
+    # dev1 = gsv8(21, 115200)
 
-    schwellwert1 = 250.0
-    hysterese_high = 0.48
-    hysterese_low = 0.45
+    schwellwert1 = 10.0
+    hysterese_high = 7.0
+    hysterese_low = 5.0
 
 
     # einen eine Messung anstoßen
@@ -91,7 +91,7 @@ if __name__ == '__main__':
     try:
         while (True):
             # Eine Messung anfordern und Messwert von Kanal1 in einer Variablen speichern
-            messwert = dev1.ReadValue().getChannel3()
+            messwert = dev1.ReadValue().getChannel7()
             # print messwert
             '''
             # Aktion auf Schwellwert - Enifache Variante

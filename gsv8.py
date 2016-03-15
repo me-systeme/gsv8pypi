@@ -1275,3 +1275,243 @@ class gsv8:
             return self._gsvLib.convertToFloat(antwortFrame.getPayload())[0]
         else:
             raise GSV_CommunicationException(antwortFrame.getAntwortErrorCode(), antwortFrame.getAntwortErrorText())
+
+    def setInputTypeToBridge_8_75V(self, channel):
+        '''
+        Setzt InputType für den angegeben DMS Kanal
+        Fuer Brueckensensoren mi eienr Speisespannung von 8,75V
+
+        :param channel: DMS Kanal 1..8 oder 0 für alle
+        :type channel: uint8
+        :return: AntwortErrorCode und AntwortErrorText
+        :rtype: liste
+        '''
+
+        # siehe Typen in der Protokollreferenz
+        return self.setInputType(channel, 0x00)
+
+    def setInputTypeToBridge_5V(self, channel):
+        '''
+        Setzt InputType für den angegeben DMS Kanal
+        Fuer Brueckensensoren mi eienr Speisespannung von 5V
+
+        :param channel: DMS Kanal 1..8 oder 0 für alle
+        :type channel: uint8
+        :return: AntwortErrorCode und AntwortErrorText
+        :rtype: liste
+        '''
+
+        # siehe Typen in der Protokollreferenz
+        return self.setInputType(channel, 0x01)
+
+    def setInputTypeToBridge_2_5V(self, channel):
+        '''
+        Setzt InputType für den angegeben DMS Kanal
+        Fuer Brueckensensoren mi eienr Speisespannung von 2,5V
+
+        :param channel: DMS Kanal 1..8 oder 0 für alle
+        :type channel: uint8
+        :return: AntwortErrorCode und AntwortErrorText
+        :rtype: liste
+        '''
+
+        # siehe Typen in der Protokollreferenz
+        return self.setInputType(channel, 0x02)
+
+    def setInputTypeToSingle_Ended(self, channel):
+        '''
+        Setzt InputType für den angegeben DMS Kanal
+        Fuer Single-ended
+
+        :param channel: DMS Kanal 1..8 oder 0 für alle
+        :type channel: uint8
+        :return: AntwortErrorCode und AntwortErrorText
+        :rtype: liste
+        '''
+
+        # siehe Typen in der Protokollreferenz
+        return self.setInputType(channel, 0x03)
+
+    def setInputTypeToTEMP_PT1000(self, channel):
+        '''
+        Setzt InputType für den angegeben DMS Kanal
+        Fuer Temperatursensor PT1000
+
+        :param channel: DMS Kanal 1..8 oder 0 für alle
+        :type channel: uint8
+        :return: AntwortErrorCode und AntwortErrorText
+        :rtype: liste
+        '''
+
+        # siehe Typen in der Protokollreferenz
+        return self.setInputType(channel, 0x04)
+
+    def setInputTypeToTemp_K_Type(self, channel):
+        '''
+        Setzt InputType für den angegeben DMS Kanal
+        Fuer Temperatursensor K-Type
+
+        :param channel: DMS Kanal 1..8 oder 0 für alle
+        :type channel: uint8
+        :return: AntwortErrorCode und AntwortErrorText
+        :rtype: liste
+        '''
+
+        # siehe Typen in der Protokollreferenz
+        return self.setInputType(channel, 0x05)
+
+    def setInputType(self, channel, inputType):
+        '''
+        Setzt InputType für den angegeben DMS Kanal
+
+        :param channel: zugehoeriger DMS-Kanal
+        :param InputType: InputType aus Datenblatt
+        :type channel: uint8
+        :type InputType: uint8
+        :return: AntwortErrorCode und AntwortErrorText
+        :rtype: liste
+        '''
+
+        # erstelle zu sendene Bytefolge für SetDIOtype
+        output = self._gsvLib.buildSetInputTypeGSV8(channel, inputType)
+
+        # sende Daten via serialport
+        self._gsvSerialPort.write(output)
+
+        # ersten AntwortFrame aus der Queue holen
+        antwortFrame = self._antwortQueue.get()
+
+        # returnstatment erzeugen
+
+        if (antwortFrame.getAntwortErrorCode() == 0x00):
+            result = [antwortFrame.getAntwortErrorCode(), antwortFrame.getAntwortErrorText()]
+        else:
+            raise GSV_CommunicationException(antwortFrame.getAntwortErrorCode(), antwortFrame.getAntwortErrorText())
+
+        return result
+
+    def getInputTypeForBridge_8_75V(self, channel):
+        '''
+        Holt den aktuellen Messbereiche
+        Fuer Brueckensensoren mi eienr Speisespannung von 8,75V
+
+        :param channel: DMS Kanal 1..8 oder 0 für alle
+        :type channel: uint8
+        :return: AntwortErrorCode und AntwortErrorText
+        :rtype: liste
+        '''
+
+        # siehe Typen in der Protokollreferenz
+        return self.getInputType(channel, 0x00)
+
+    def getInputTypeForBridge_5V(self, channel):
+        '''
+        Holt den aktuellen Messbereiche
+        Fuer Brueckensensoren mi eienr Speisespannung von 8,75V
+
+        :param channel: DMS Kanal 1..8 oder 0 für alle
+        :type channel: uint8
+        :return: AntwortErrorCode und AntwortErrorText
+        :rtype: liste
+        '''
+
+        # siehe Typen in der Protokollreferenz
+        return self.getInputType(channel, 0x01)
+
+    def getInputTypeForBridge_2_5V(self, channel):
+        '''
+        Holt den aktuellen Messbereiche
+        Fuer Brueckensensoren mi eienr Speisespannung von 8,75V
+
+        :param channel: DMS Kanal 1..8 oder 0 für alle
+        :type channel: uint8
+        :return: AntwortErrorCode und AntwortErrorText
+        :rtype: liste
+        '''
+
+        # siehe Typen in der Protokollreferenz
+        return self.getInputType(channel, 0x02)
+
+    def getInputTypeForSingle_Ended(self, channel):
+        '''
+        Holt den aktuellen Messbereiche
+        Fuer Signle-ended
+
+        :param channel: DMS Kanal 1..8 oder 0 für alle
+        :type channel: uint8
+        :return: AntwortErrorCode und AntwortErrorText
+        :rtype: liste
+        '''
+
+        # siehe Typen in der Protokollreferenz
+        return self.getInputType(channel, 0x03)
+
+    def getInputTypeForTemp_PT1000(self, channel):
+        '''
+        Holt den aktuellen Messbereiche
+        Fuer Temperatursensor PT1000
+
+        :param channel: DMS Kanal 1..8 oder 0 für alle
+        :type channel: uint8
+        :return: AntwortErrorCode und AntwortErrorText
+        :rtype: liste
+        '''
+
+        # siehe Typen in der Protokollreferenz
+        return self.getInputType(channel, 0x04)
+
+    def getInputTypeForTemp_K_Type(self, channel):
+        '''
+        Holt den aktuellen Messbereiche
+        Fuer Temperatursensor K-Type
+
+        :param channel: DMS Kanal 1..8 oder 0 für alle
+        :type channel: uint8
+        :return: AntwortErrorCode und AntwortErrorText
+        :rtype: liste
+        '''
+
+        # siehe Typen in der Protokollreferenz
+        return self.getInputType(channel, 0x05)
+
+    def getInputType(self, channel):
+        '''
+        Sholt den aktuellen Messbereiche
+
+        :param channel: DMS Kanal 1..8 oder 0 für alle
+        :type channel: uint8
+        :return: AntwortErrorCode und AntwortErrorText
+        :rtype: liste
+        '''
+
+        # siehe Typen in der Protokollreferenz
+        return self.getInputType(channel, 0xFF)
+
+    def getInputType(self, channel, inputType):
+        '''
+        holt den aktuellen Messbereiche für den angegeben InputType
+
+        :param channel: zugehoeriger DMS-Kanal
+        :param InputType: InputType aus Datenblatt
+        :type channel: uint8
+        :type InputType: uint8
+        :return: AntwortErrorCode und AntwortErrorText
+        :rtype: liste
+        '''
+
+        # erstelle zu sendene Bytefolge für SetDIOtype
+        output = self._gsvLib.buildReadInputType(channel, inputType)
+
+        # sende Daten via serialport
+        self._gsvSerialPort.write(output)
+
+        # ersten AntwortFrame aus der Queue holen
+        antwortFrame = self._antwortQueue.get()
+
+        # returnstatment erzeugen
+
+        if (antwortFrame.getAntwortErrorCode() == 0x00):
+            result = [antwortFrame.getAntwortErrorCode(), antwortFrame.getAntwortErrorText()]
+        else:
+            raise GSV_CommunicationException(antwortFrame.getAntwortErrorCode(), antwortFrame.getAntwortErrorText())
+        return result

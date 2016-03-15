@@ -60,9 +60,9 @@ if __name__ == '__main__':
     running = True
     # construct device
     # UNIX
-    # dev1 = gsv8("/dev/ttyACM0",115200)
+    dev1 = gsv8("/dev/ttyACM0",115200)
     # Windows
-    dev1 = gsv8("COM22", 115200)
+    # dev1 = gsv8("COM22", 115200)
 
     # Messaufzeichnung starten
     dev1.startCSVrecordingWithoutStartTransmisson('./messungen', 'dev1')

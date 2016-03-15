@@ -89,5 +89,6 @@ anfrage_code_to_shortcut = {
     'WriteDataRate': 0x8B,
     'ReadUserOffset': 0x9A,
     'WriteUserOffset': 0x9B,
-    'GetInputType': 0xA2
+    'GetInputType': 0xA2,
+    'SetInputType': 0xA3
 }

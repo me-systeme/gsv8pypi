@@ -69,7 +69,7 @@ class MessFrameHandler():
         self.safeOption = False
         self.messCSVDictList = []
         self.messCSVDictList_lock = threading.Lock()
-        self.maxCacheMessCount = 1000
+        self.maxCacheMessCount = 10
         self.startTimeStampStr = ''
         self.recordPrefix = ''
         self.doRecording = False

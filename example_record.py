@@ -59,9 +59,9 @@ import sys
 if __name__ == '__main__':
     # construct device
     # Unix
-    # dev1 = gsv8("/dev/ttyACM0",115200)
+    dev1 = gsv8("/dev/ttyACM0",115200)
     # Windows
-    dev1 = gsv8("COM22", 115200)
+    # dev1 = gsv8("COM22", 115200)
 
     # einen eine Messung anstoßen
     measurement = dev1.ReadValue()

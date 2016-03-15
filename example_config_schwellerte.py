@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
 Datum 02.2016
-@author: ME-Meßsysteme GmbH, Robert Bremsat, Dennis Rump
+@author: ME-Meßsysteme GmbH, Dennis Rump
 @version 1.2
 """
-__author__ = 'Robert bremsat & Dennis Rump'
+__author__ = 'Dennis Rump'
 ###############################################################################
 #
 # The MIT License (MIT)
@@ -60,13 +60,6 @@ if __name__ == '__main__':
     # Windows
     # dev1 = gsv8(21, 115200)
 
-    # ausgabetyp setzten
-    '''
-    result =  dev1.setTXmodefloat()
-    if(dev1.isResultOk(result)):
-        print "setTXmodefloat erfolgreich"
-    '''
-
     # Datenrate setzten
     result = dev1.writeDataRate(30.0)
     # Ergebnis pruefen
@@ -75,14 +68,6 @@ if __name__ == '__main__':
 
     # datenrate veraendern
     print 'aktuelle Datenrate: {} Hz'.format(dev1.readDataRate())
-
-    # Skalierung der Kanael 1 bis 6 werden durch das Laden der Kalibriermatrix gesetzt
-
-    # setzt die Skalierung des Kanal 7 in Zusammenhang mit den Sensorkennwerten
-    # Nennlast (FS) = 5kN = 5000N
-    # Kennwert = 1,8308 mV/V
-    dev1.setUserScaleBySensor(7,5000,1.8308)
-
 
     # DIO Gruppe 1 als Input Konfigurieren ( IOPin 1..4 (1.1 - 1.4) )
     result = dev1.setDIOgroupToInput(1)
@@ -110,21 +95,11 @@ if __name__ == '__main__':
 
 
     dev1.setInputToTaraInputForAllChannels(3);
-    #dev1.setStartTransmissionByInputIsHigh(4);
-    dev1.setDIOtoGenralPurposeInput(4)
-    # SetInputType
-
-    # Beispiel zum erfragen der aktuellen Einstellung der DIO Gruppe
-    '''
-    if(dev1.isDIOgroupInput(1)):
-        print "Gruppe 1 ist als Eingang konfiguriert"
-    if(dev1.isDIOgroupOutput(2)):
-        print "Gruppe 2 ist als Ausgang konfiguriert"
-    '''
+    dev1.setStartTransmissionByInputIsHigh(4);
 
     # Nun reaktion auf die Schwellwerte konfigurieren
     # IOPin 9 (3.1) soll auf Kanal 1 reagieren
-    dev1.setOutputHighIfOutsideWindow(9,1)
+    dev1.setOutputHighIfInsideWindow(9,7)
     # IOPin 10 (3.2) soll auf Kanal 2 reagieren
     dev1.setOutputHighIfOutsideWindow(10,2)
     # IOPin 11 (3.3) soll auf Kanal 3 reagieren
@@ -136,7 +111,7 @@ if __name__ == '__main__':
     # IOPin 14 (4.2) soll auf Kanal 6 reagieren
     dev1.setOutputHighIfOutsideWindow(14,6)
     # IOPin 15 (4.3) soll auf Kanal 1 reagieren
-    dev1.setOutputHighIfOutsideWindow(15,1)
+    dev1.setOutputHighIfInsideWindow(15,7)
     # IOPin 16 (4.4) soll auf Kanal 7 reagieren
     dev1.setOutputHighIfOutsideWindow(16,7)
 
@@ -145,8 +120,8 @@ if __name__ == '__main__':
     print 'oberer  Schwellwert fuer DMS-Kanal 1: {}'.format(dev1.readUpperDIOthreshold(9))
 
     # Schwellwerte fuer Fx
-    dev1.writeLowerDIOthreshold(9,-10.0)
-    dev1.writeUpperDIOthreshold(9,+10.0)
+    dev1.writeLowerDIOthreshold(9,+5.0)
+    dev1.writeUpperDIOthreshold(9,+40.0)
     # Schwellwerte fuer Fy
     dev1.writeLowerDIOthreshold(10,-250.0)
     dev1.writeUpperDIOthreshold(10,+250.0)
@@ -165,8 +140,8 @@ if __name__ == '__main__':
     dev1.writeUpperDIOthreshold(14,+10.0)
 
     # Schwellwerte fuer Mz
-    dev1.writeLowerDIOthreshold(15,-10.0)
-    dev1.writeUpperDIOthreshold(15,+10.0)
+    dev1.writeLowerDIOthreshold(15,+5.0)
+    dev1.writeUpperDIOthreshold(15,+40.0)
 
     # Schwellwerte fuer DMS Kanal 7
     dev1.writeLowerDIOthreshold(16,-2500.0)
@@ -174,7 +149,7 @@ if __name__ == '__main__':
 
 
     # Verrechnungsmatrix aktivieren
-    if(dev1.setSixAxisMatrixActive(False)):
+    if(dev1.setSixAxisMatrixActive(True)):
         pass
         # aktiverung/deaktivierung erflgreich
 
